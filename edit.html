@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Student</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <h3 class="text-center mb-4">Edit Student Record</h3>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <label>Student Name</label>
+    <input type="text" name="student_name" class="form-control" value="{{ student.student_name }}" required>
+
+    <label class="mt-2">Attendance</label>
+    <input type="number" name="attendance" class="form-control" value="{{ student.attendance }}" required>
+
+    <label class="mt-2">Percentage</label>
+    <input type="number" name="percentage" class="form-control" value="{{ student.percentage }}" required>
+
+    <label class="mt-2">Department</label>
+    <input type="text" name="department" class="form-control" value="{{ student.department }}" required>
+    <br>
+
+      <label class="mt-2">Risk</label>
+    <input type="text" name="risk" class="form-control" value="{{ student.risk }}" required>
+    <br>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a href="{% url 'student:view_students' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+</body>
+</html>
