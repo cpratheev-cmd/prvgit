@@ -1,0 +1,162 @@
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+<style>
+    body{
+        font-family: 'Poppins', sans-serif;
+        background: #f4f6fb;
+        margin:0;
+        padding:30px;
+    }
+
+    h2{
+        text-align:center;
+        color:#333;
+        margin-bottom:20px;
+    }
+
+    .card{
+        background:white;
+        padding:25px;
+        border-radius:10px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        max-width:1000px;
+        margin:auto;
+    }
+
+    .stats{
+        display:flex;
+        justify-content:space-around;
+        margin-bottom:20px;
+        flex-wrap:wrap;
+    }
+
+    .stat-box{
+        background:#eef2ff;
+        padding:15px 25px;
+        border-radius:8px;
+        text-align:center;
+        margin:5px;
+        min-width:150px;
+    }
+
+    .stat-box h3{
+        margin:0;
+        color:#2c3e50;
+    }
+
+    .stat-box p{
+        margin:5px 0 0;
+        font-size:14px;
+        color:#555;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:15px;
+    }
+
+    th{
+        background:#4a69bd;
+        color:white;
+        padding:12px;
+    }
+
+    td{
+        padding:10px;
+        text-align:center;
+        border-bottom:1px solid #ddd;
+    }
+
+    tr:hover{
+        background:#f1f3ff;
+    }
+
+    .badge{
+        padding:4px 10px;
+        border-radius:15px;
+        color:white;
+        font-size:12px;
+    }
+
+    .high{
+        background:#e74c3c;
+    }
+
+    .medium{
+        background:#f39c12;
+    }
+
+    .low{
+        background:#27ae60;
+    }
+
+    .alert-count{
+        background:#2c3e50;
+        color:white;
+        padding:5px 10px;
+        border-radius:15px;
+    }
+</style>
+</head>
+<div class="stats">
+
+    <div class="stat-box">
+        <h3>{{ students|length }}</h3>
+        <p>Total Students</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>{{ max_alert }}</h3>
+        <p>Max Alerts Sent</p>
+    </div>
+
+</div>
+<table>
+
+    <tr>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Risk Level</th>
+        <th>Email Alerts</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s.student_id }}</td>
+        <td>{{ s.student_name }}</td>
+
+        <td>
+            <span class="badge
+                {% if s.risk == 'HIGH' %}high
+                {% elif s.risk == 'MEDIUM' %}medium
+                {% else %}low
+                {% endif %}
+            ">
+                {{ s.risk }}
+            </span>
+        </td>
+        <td>
+            <span class="alert-count">
+                {{ s.alert_count }}
+            </span>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+<br>
+
+ <div class="text-center">
+    <a href="{% url 'teacher_dashboard' %}" class="btn btn-primary">Back</a>
+  </div>
+</body>
+</html>

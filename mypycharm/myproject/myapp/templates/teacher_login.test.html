@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Login</title>
+       <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        background-image: url("{% static 'back.png' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-container {
+        width: 360px;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.7); /* SAME opacity */
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+      }
+
+      .login-container h1 {
+        text-align: center;
+        color: orange;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+        font-size:25px;
+      }
+
+      .login-container h2 {
+        text-align: center;
+        color: white;
+        margin-bottom: 25px;
+        font-weight: normal;
+        font-size:20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        color: white;
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        font-size: 16px;
+        outline: none;
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus {
+        box-shadow: 0 0 10px 2px dodgerblue;
+        transition: 0.3s;
+      }
+
+      .btn-login {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        background-color: orange;
+        color: black;
+        cursor: pointer;
+        transition: 1.3s;
+      }
+
+      .btn-login:hover {
+        background-color: aqua;
+        box-shadow: 0 0 10px aqua;
+      }
+
+      .register-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 16px;
+      }
+
+      .register-link a {
+        color: orange;
+        text-decoration: none;
+        transition:1s;
+      }
+
+      .register-link a:hover {
+        color: white;
+        text-decoration:underline;
+      }
+.logout-icon {
+  color: red;
+  font-size: 20px;
+}
+.logout-icon:hover {
+  color: darkred;
+  transform: scale(1.1);
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="login-container">
+        <h2>WELCOME &nbsp;&nbsp;&nbsp;<a href="{% url 'new' %}" class="btn btn-outline-danger text-end">
+  <i class="bi bi-box-arrow-left logout-icon"></i>
+</a>
+        </h2>
+      <h1>TEACHER LOGIN</h1>
+      <form method="post" action="{% url 'teacher_login' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label><i class="bi bi-person-circle"></i>&nbsp;User ID</label>
+          <input type="text" name="t1" required autofocus />
+        </div>
+
+        <div class="form-group">
+          <label><i class="bi bi-lock"></i>&nbsp;Password</label>
+          <input type="password" name="t2" required />
+        </div>
+
+        <input type="submit" value="Login" class="btn-login" />
+
+        <div class="register-link">
+          <a href="{% url 'teacher_register' %}">Register!</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

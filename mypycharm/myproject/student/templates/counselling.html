@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Counselling Section</title>
+
+```
+<style>
+    body{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg,#89f7fe,#66a6ff);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        margin:0;
+    }
+
+    .card{
+        background:white;
+        padding:35px;
+        width:420px;
+        border-radius:18px;
+        box-shadow:0 15px 35px rgba(0,0,0,0.25);
+        transition:transform 0.3s ease, box-shadow 0.3s ease;
+
+    }
+
+    .card:hover{
+        transform:translateY(-5px);
+        box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#333;
+        letter-spacing:0.5px;
+    }
+
+    label{
+        font-weight:600;
+        margin-top:12px;
+        display:block;
+        color:#444;
+    }
+
+    input, textarea, select{
+        width:100%;
+        padding:12px;
+        margin-top:8px;
+        border-radius:8px;
+        border:1px solid #ccc;
+        outline:none;
+        font-size:14px;
+        transition:all 0.3s ease;
+        box-sizing:border-box;
+    }
+
+    textarea{
+        resize:none;
+        min-height:80px;
+    }
+
+    input:focus, textarea:focus, select:focus{
+        border-color:#007bff;
+        box-shadow:0 0 8px rgba(0,123,255,0.3);
+    }
+
+    select{
+        cursor:pointer;
+        background-color:#f9f9f9;
+    }
+
+    button{
+        margin-top:18px;
+        padding:12px;
+        width:100%;
+        background:linear-gradient(135deg,#007bff,#0056b3);
+        color:white;
+        border:none;
+        border-radius:8px;
+        font-size:15px;
+        font-weight:600;
+        cursor:pointer;
+        transition:all 0.3s ease;
+    }
+
+    button:hover{
+        background:linear-gradient(135deg,#0056b3,#004494);
+        transform:scale(1.03);
+        box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button:active{
+        transform:scale(0.98);
+    }
+
+    @keyframes fadeIn{
+        from{
+            opacity:0;
+            transform:translateY(20px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Counselling for {{ student.student_name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+```
+<label>Notes</label>
+<textarea name="notes" required></textarea>
+
+<label>Recommendation</label>
+<textarea name="recommendation" required></textarea>
+
+<label>Status</label>
+<select name="status" required>
+    <option value="ONGOING">Ongoing</option>
+    <option value="IMPROVED">Improved</option>
+    <option value="CRITICAL">Critical</option>
+</select>
+
+<button type="submit">Save</button>
+```
+
+</form>
+
+</div>
+
+</body>
+</html>
+

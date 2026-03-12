@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Students</title>
+    <style>
+*{
+margin:0;
+padding:0;
+}
+    </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<form method="get" class="row g-5 mt-3 pt-4 mb-2">
+
+    <div class="col-md-4 mx-5">
+        <input type="text" name="search" class="form-control"
+               placeholder="Search by student name">
+    </div>
+
+    <div class="col-md-3">
+        <select name="risk" class="form-select">
+            <option value="">Filter by Risk</option>
+            <option value="HIGH">High</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="LOW">Low</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <select name="status" class="form-select">
+            <option value="">Filter by Status</option>
+            <option value="ONGOING">Ongoing</option>
+            <option value="IMPROVED">Improved</option>
+            <option value="CRITICAL">Critical</option>
+        </select>
+    </div>
+    <br>
+    <div class="col-md-2 mx-5">
+        <button type="submit" class="btn btn-primary w-100">
+            Search
+        </button>
+    </div>
+
+</form>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Student Records</h2>
+
+  <table class="table table-bordered table-striped text-center">
+    <thead class="table-dark">
+    <tr> <th>ID</th>
+        <th>Name</th>
+        <th>Attendance</th>
+        <th>Percentage</th>
+        <th>Department</th>
+        <th>Risk</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+      <tbody> {% for s in students %}
+      <tr>
+          <td>{{ s.student_id }}</td>
+          <td>{{ s.student_name }}</td>
+          <td>{{ s.attendance }}</td>
+          <td>{{ s.percentage }}</td>
+          <td>{{ s.department }}</td>
+          <td> {% if s.risk == "HIGH" %}
+              <span class="badge bg-danger">{{ s.risk }}</span>
+              {% elif s.risk == "MEDIUM" %}
+              <span class="badge bg-warning text-dark">{{ s.risk }}</span>
+              {% else %}
+              <span class="badge bg-success">{{ s.risk }}</span>
+              {% endif %} </td>
+
+          <td>
+    {% if s.status == "IMPROVED" %}
+        <span class="badge bg-success">Improved</span>
+    {% elif s.status == "CRITICAL" %}
+        <span class="badge bg-danger">Critical</span>
+    {% else %}
+        <span class="badge bg-secondary">Ongoing</span>
+    {% endif %}
+</td>
+          <td>
+              <a href="{% url 'student:counselling' s.student_id %}" class="btn btn-outline-primary btn-sm"> Counselling </a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="{% url 'student:edit_student' s.student_id %}" class="btn btn-outline-warning btn-sm"> Edit </a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="{% url 'student:delete_student' s.student_id %}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this student?')">
+                  Delete </a>
+              <a href="{% url 'student:counseling_dashboard' s.student_id %}" class="btn btn-outline-info btn-sm">
+                  History</a>
+</td> </tr>
+      {% empty %}
+      <tr>
+          <td colspan="7">No students found</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+  </table>
+    <br>
+  <div class="text-center">
+    <a href="{% url 'teacher_dashboard' %}" class="btn btn-primary">Back</a>
+  </div>
+</div>
+</body>
+</html>

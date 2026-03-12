@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Student dropout Prediction</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      img {
+        height: 65px;
+        border-radius: 100%;
+        padding: 2px 3px 3px;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      .center {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .student-card {
+        width: 420px;
+        padding: 25px 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(36, 56, 237, 0.868);
+      }
+      .student-card form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .student-card label {
+        margin-top: 10px;
+        font-weight: 600;
+      }
+
+      .student-card input,
+      .student-card select {
+        margin-top: 5px;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dropdown bg-dark">
+      <img src="{% static 'logo.png' %}" />
+      <button
+        class="btn btn-primary dropdown-toggle mx-2"
+        id="dropdownMenu2"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="bi bi-three-dots"></i>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li><a class="dropdown-item" href="{% url 'student:view_students' %}" type="button">Records</a></li>
+       <li> <a class="dropdown-item" href="{% url 'student:high_risk_students' %}">High Risk Students</a></li>
+          <li><a class="dropdown-item" href="{% url 'student:medium_risk_students' %}">Medium Risk Students</a></li>
+          <li><a class="dropdown-item" href="{% url 'student:low_risk_students' %}">Low Risk Students</a></li>
+            <li>  <a class="dropdown-item" href="{% url 'student:alert_dashboard' %}">
+    Alert Dashboard
+</a></li>
+          <li>
+          <a href="{% url 'new' %}" class="dropdown-item" type="button">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <h2 class="text-center text-primary pt-3">Teacher Dashboard</h2>
+    <div class="center">
+      <div class="card student-card">
+       <form method="post" action="{% url 'student:add_student' %}">
+         {% csrf_token %}
+          <h1 style="font-size: 20px" class="text-center text-danger">
+            <i class="bi bi-person-fill"></i>
+            ADD STUDENT RECORD
+          </h1>
+          <label>Student ID</label>
+          <input
+            type="text" name="student_id"
+            placeholder="Enter Student Id"
+            required
+            autofocus
+          />
+          <label>Student Name</label>
+          <input type="text"  name="student_name" placeholder="Enter Student Name" required />
+
+          <label>Attendance</label>
+          <input type="number" name="attendance" placeholder="1-100" required />
+
+          <label>Overall Percentage</label>
+          <input type="number" name="percentage" placeholder="1-100" />
+
+          <label>Department</label>
+          <select name="department">
+            <option>COS</option>
+            <option>BCA</option>
+            <option>CME</option>
+            <option>CMC</option>
+            <option>DATA SCIENCE</option>
+            <option>BBA</option></select
+          ><br />
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-floppy"></i>&nbsp; Save
+          </button>
+          <br />
+          <button type="reset" class="btn btn-danger">
+            <i class="bi bi-trash3-fill"></i>&nbsp;Delete
+          </button>
+        </form>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
